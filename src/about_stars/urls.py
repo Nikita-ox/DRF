@@ -5,11 +5,11 @@ from stars import views
 # from stars.views import ListViews
 from stars.views import *
 
-router = routers.SimpleRouter()
+router = routers.DefaultRouter()
 '''
 Генерация всех путей связанных со StarsViewSet 
 '''
-router.register(r'stars', StarsViewSet)
+router.register(r'stars', StarsViewSet, basename='star')
 '''
 stars - перфикс к пути:
 api/v1/stars/
