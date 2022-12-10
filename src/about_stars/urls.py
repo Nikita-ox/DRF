@@ -5,21 +5,12 @@ from stars import views
 # from stars.views import ListViews
 from stars.views import *
 
-router = routers.DefaultRouter()
-'''
-Генерация всех путей связанных со StarsViewSet 
-'''
-router.register(r'stars', StarsViewSet, basename='star')
-'''
-stars - перфикс к пути:
-api/v1/stars/
-'''
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
-
-    # path('api/v1/startlist/', StarsViewSet.as_view({'get': 'list'})),
-    # path('api/v1/startlist/<int:pk>/', StarsViewSet.as_view({'put': 'update'})),
+    path('api/v1/stars/', StarsAPIList.as_view()),
+    path('api/v1/stars/<int:pk>/', StarsAPIUpdate.as_view()),
+    path('api/v1/starsdelete/<int:pk>/', StarsAPIDestroy.as_view()),
 ]
+

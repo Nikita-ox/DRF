@@ -1,34 +1,19 @@
-import io
-
 from rest_framework import serializers
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
 from rest_framework.serializers import ModelSerializer
 
 from stars.models import Stars
 
 
-# class StarsModel:
-#     def __init__(self, title, content):
-#         self.title = title
-#         self.content = content
-
-
 class StarsSerializer(ModelSerializer):
+    """Связь с моделью Stars, с полем user"""
+
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    """
+    HiddenField - скрытое поле и по умолчанию  default
+    прописывается текущий пользователь CurrentUserDefault
+    """
+
     class Meta:
         model = Stars
         fields = "__all__"
-
-
-
-
-
-
-
-
-
-
-
-
-
 
