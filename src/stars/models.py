@@ -1,4 +1,8 @@
 from django.db import models
+"""
+Импортируем User именно так
+"""
+from django.contrib.auth.models import User
 
 
 class Stars(models.Model):
@@ -8,6 +12,7 @@ class Stars(models.Model):
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -18,5 +23,4 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
 
