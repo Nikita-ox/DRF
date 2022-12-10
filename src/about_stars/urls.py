@@ -19,9 +19,13 @@ from django.urls import path
 
 from stars import views
 # from stars.views import ListViews
-from stars.views import StarsAPIView
+from stars.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/startlist/', StarsAPIView.as_view()),
+    path('', start),
+    path('api/v1/startlist/', StarsAPIList.as_view()),
+    path('api/v1/startlist/<int:pk>/', StarsAPIList.as_view()),
 ]
+
+
