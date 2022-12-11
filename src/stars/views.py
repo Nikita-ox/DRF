@@ -1,6 +1,7 @@
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, \
     RetrieveDestroyAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
 
 from stars.models import Stars
 from stars.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
@@ -20,7 +21,8 @@ class StarsAPIList(ListCreateAPIView):
 class StarsAPIUpdate(RetrieveUpdateDestroyAPIView):
     queryset = Stars.objects.all()
     serializer_class = StarsSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (IsAuthenticated,)  # Поменяли IsOwnerOrReadOnly
+    # authentication_classes = (TokenAuthentication,)  # Доступ только по токену
     """Запятая после означает кортеж"""
 
 
@@ -31,6 +33,4 @@ class StarsAPIDestroy(RetrieveDestroyAPIView):
     Удалять может только администратор,
     а читать все пользователи
     """
-    permission_classes = (IsAdminOrReadOnly, )
-
-
+    permission_classes = (IsAdminOrReadOnly,)
